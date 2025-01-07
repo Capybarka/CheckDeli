@@ -1,21 +1,24 @@
 <template>
-  <v-sheet class="pa-5 rounded-xl bg-background-light">
+  <v-sheet
+    color="background-light"
+    class="pa-5 rounded-xl"
+  >
     <v-text-field
       label="Название"
-      v-model="localDish.name"
+      v-model="dish.name"
     >
       <template v-slot:prepend>
-        <v-icon>mdi-food-fork-drink</v-icon>
+        <v-icon> mdi-food-fork-drink </v-icon>
       </template>
     </v-text-field>
 
     <v-text-field
       type="number"
       label="Цена"
-      v-model="localDish.price"
+      v-model="dish.price"
     >
       <template v-slot:prepend>
-        <v-icon>mdi-currency-rub</v-icon>
+        <v-icon> mdi-currency-rub </v-icon>
       </template>
     </v-text-field>
 
@@ -26,7 +29,7 @@
         style="flex: 0 0 50%"
         prepend-icon="mdi-wallet"
       >
-        {{ localDish.payer.name }}
+        {{ dish.payer.name }}
       </v-btn>
       <v-btn
         class="elevation-3 py-2 bg-primary"
@@ -50,12 +53,13 @@
         <v-expansion-panel-text>
           <div class="d-flex flex-wrap ga-5">
             <v-btn
-              class="align-center mt-2 bg-primary"
+              color="primary"
+              class="align-center mt-2"
               @click="checkAllPersons"
             >
               {{ allPersonsSelected ? 'Отменить выбор' : 'Все' }}
             </v-btn>
-            <div class="d-flex flex-wrap ga-4">
+            <div class="users__list d-flex flex-wrap ga-4">
               <v-checkbox
                 v-for="person in PersonStore.persons"
                 dense
@@ -64,7 +68,8 @@
                 :key="person.id"
                 :label="person.name"
                 :value="person"
-              ></v-checkbox>
+              >
+              </v-checkbox>
             </div>
           </div>
         </v-expansion-panel-text>
@@ -72,18 +77,19 @@
     </v-expansion-panels>
 
     <v-dialog
-      v-model="dialog"
       width="auto"
+      v-model="dialog"
     >
-      <v-card class="pa-10">
-        <v-radio-group v-model="localDish.payer">
+      <v-card class="pa-10 bg-background-light">
+        <v-radio-group v-model="dish.payer">
           <p class="font-weight-bold mb-5">Выберите того, кто платил за это блюдо</p>
           <v-radio
             v-for="person in PersonStore.persons"
             :key="person.id"
             :label="person.name"
             :value="person"
-          ></v-radio>
+          >
+          </v-radio>
         </v-radio-group>
       </v-card>
     </v-dialog>
@@ -101,9 +107,9 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch } from 'vue';
-import { usePersonStore } from '@/stores/PersonStore';
-import { useDishStore } from '@/stores/DishStore';
+import { ref, watch } from 'vue';
+import { usePersonStore } from '../stores/PersonStore';
+import { useDishStore } from '../stores/DishStore';
 
 const props = defineProps({
   dish: {
@@ -112,50 +118,28 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['update:dish']);
-
-// локальная копия dish
-const localDish = reactive({ ...props.dish });
-
-watch(
-  () => localDish,
-  (newVal) => {
-    emit('update:dish', newVal);
-  },
-  { deep: true },
-);
-
-// слежение за изменениями в родительском пропс dish
-watch(
-  () => props.dish,
-  (newVal) => {
-    Object.assign(localDish, newVal);
-  },
-  { deep: true },
-);
-
-const PersonStore = usePersonStore();
-const DishStore = useDishStore();
+const PersonStore = usePersonStore()
+const DishStore = useDishStore()
 
 const dialog = ref(false);
 
 const deleteDish = (dish) => {
-  DishStore.deleteDish(dish.id);
+  DishStore.deleteDish(dish.id)
 };
 
-const selectedPersons = ref([]);
-const allPersonsSelected = ref(false);
+const selectedPersons = ref([])
+const allPersonsSelected = ref(false)
 
 const checkAllPersons = () => {
   if (allPersonsSelected.value) {
-    selectedPersons.value = [];
+    selectedPersons.value = []
   } else {
-    selectedPersons.value = [...PersonStore.persons];
+    selectedPersons.value = [...PersonStore.persons]
   }
 };
 
 watch(selectedPersons, (newValues) => {
-  allPersonsSelected.value = newValues.length === PersonStore.persons.length ? true : false;
-  DishStore.updateUsers(props.dish.id, newValues);
-});
+  allPersonsSelected.value = newValues.length === PersonStore.persons.length ? true : false
+  DishStore.updateUsers(props.dish.id, newValues)
+})
 </script>
