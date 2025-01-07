@@ -76,25 +76,24 @@ import { useRouter } from 'vue-router';
 import EmptyMessage from '@/components/EmptyMessage.vue';
 import DishCard from '@/components/DishCard.vue';
 
-const DishStore = useDishStore()
-const CalculationStore = useCalculationStore()
-const WarningStore = useWarningStore()
+const DishStore = useDishStore();
+const CalculationStore = useCalculationStore();
+const WarningStore = useWarningStore();
 
 const router = useRouter();
 
 const initDish = () => {
-  DishStore.initDish()
+  DishStore.initDish();
 };
 
 const goToResult = () => {
   if (!DishStore.checkDishes()) {
-    WarningStore.showWarning('Заполните все поля!')
-    return
+    WarningStore.showWarning('Заполните все поля!');
+    return;
   } else if (DishStore.dishes.length < 2) {
-    WarningStore.showWarning('Добавьте минимум 2 блюда!')
-    return
+    WarningStore.showWarning('Добавьте минимум 2 блюда!');
+    return;
   }
-  DishStore.getAllDishes()
-  router.push('/result')
-}
+  router.push('/result');
+};
 </script>

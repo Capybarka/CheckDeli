@@ -11,12 +11,12 @@ export const useWarningStore = defineStore('WarningStore', {
 
   actions: {
     showWarning(text, type = 'warning') {
-      this.warningText = text
-      this.warningType = type
-      this.isWarningShow = true
+      this.warningText = text;
+      this.warningType = type;
+      this.isWarningShow = true;
 
       setTimeout(() => {
-        this.isWarningShow = false
+        this.isWarningShow = false;
       }, 3000);
     },
   },
