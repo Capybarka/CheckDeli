@@ -35,7 +35,7 @@
         <v-btn
           append-icon="mdi-hand-pointing-right"
           color="primary"
-          @click="router.push('/dishes')"
+          @click="goToDishes"
         >
           Далеe
         </v-btn>

@@ -10,21 +10,10 @@
   <v-row justify="center">
       <v-col cols="auto">
         <v-btn
-          prepend-icon="mdi-hand-pointing-left"
-          color="primary"
-          @click="router.push('/dishes')"
-        >
-          Назад
-        </v-btn>
-      </v-col>
-
-      <v-col cols="auto">
-        <v-btn
-          append-icon="mdi-hand-pointing-right"
           color="primary"
           @click="router.push('/')"
         >
-          Далеe
+          На главную
         </v-btn>
       </v-col>
     </v-row>

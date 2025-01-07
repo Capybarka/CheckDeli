@@ -2,13 +2,14 @@ import { defineStore } from 'pinia';
 import { useDishStore } from './DishStore';
 
 export const useCalculateStore = defineStore('CalculateStore', {
-  state: () => {},
+  state: () => {
+    return {
+    }
+  },
   getters: {
     getTotalSum() {
       const DishStore = useDishStore();
-      let total = 0;
-      DishStore.dishes.forEach((dish) => (total += Number(dish.price)));
-      return total;
+      return DishStore.dishes.reduce((sum, dish) => sum + Number(dish.price), 0)
     },
   },
 });

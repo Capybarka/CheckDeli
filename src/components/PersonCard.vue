@@ -4,25 +4,24 @@
       class="person-card px-5 py-3 rounded-xl elevation-5"
       variant="tonal"
     >
-      <div class="d-flex align-center justify-space-between">
-        <v-card-title>{{ person.name }}</v-card-title>
+      <v-card-title class="d-flex justify-space-between">
+        <p>{{ person.name }}</p>
         <v-icon
-          class="d-block mb-1"
+          class="d-block mb-1 text-red"
           size="large"
-          color="red"
           @click="PersonStore.deletePerson(person.id)"
         >
           mdi-delete
         </v-icon>
-      </div>
+      </v-card-title>
     </v-card>
   </div>
 </template>
 
 <script setup>
-import { usePersonStore } from '@/stores/PersonStore';
+import { usePersonStore } from '../stores/PersonStore';
 
-const PersonStore = usePersonStore();
+const PersonStore = usePersonStore()
 
 defineProps({
   person: {

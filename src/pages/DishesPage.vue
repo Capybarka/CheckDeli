@@ -46,21 +46,22 @@
   
     <v-row justify="center">
       <v-col cols="auto">
-        <v-btn 
-          color="primary" 
+        <v-btn
+          prepend-icon="mdi-hand-pointing-left"
+          color="primary"
+          @click="router.push('/persons')"
         >
-          <v-icon>mdi-hand-pointing-left</v-icon>
-          <p class="ml-5">Назад</p>
+          Назад
         </v-btn>
       </v-col>
 
       <v-col cols="auto">
-        <v-btn 
-          color="primary" 
+        <v-btn
+          append-icon="mdi-hand-pointing-right"
+          color="primary"
           @click="goToResult"
         >
-          <p class="mr-5">Далее</p>
-          <v-icon>mdi-hand-pointing-right</v-icon>
+          Далеe
         </v-btn>
       </v-col>
     </v-row>
@@ -94,6 +95,6 @@ const goToResult = () => {
     WarningStore.showWarning('Добавьте минимум 2 блюда!')
     return;
   }
-  WarningStore.showWarning('Добавьте минимум 2 блюда!')
+  router.push('/result')
 };
 </script>
