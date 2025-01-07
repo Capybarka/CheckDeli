@@ -12,6 +12,9 @@
         @add-person-emit="addPerson"
         class="mb-10"
       />
+      <empty-message v-if="PersonStore.persons.length === 0"
+        >Пока никого нет</empty-message
+      >
       <person-card
         v-for="person in PersonStore.persons"
         class="mb-5"
@@ -50,6 +53,7 @@ import { useWarningStore } from '@/stores/WarningStore';
 import { useRouter } from 'vue-router';
 import PersonForm from '@/components/PersonForm.vue';
 import PersonCard from '@/components/PersonCard.vue';
+import EmptyMessage from '@/components/EmptyMessage.vue';
 
 const PersonStore = usePersonStore()
 const WarningStore = useWarningStore()
@@ -64,7 +68,7 @@ const goToDishes = () => {
     return;
   }
   router.push('/dishes')
-};
+}
 </script>
 
 <style scoped>

@@ -21,7 +21,7 @@
 <script setup>
 import { usePersonStore } from '../stores/PersonStore';
 
-const PersonStore = usePersonStore()
+const PersonStore = usePersonStore();
 
 defineProps({
   person: {

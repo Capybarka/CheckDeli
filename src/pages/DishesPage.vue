@@ -4,15 +4,7 @@
       class="d-flex pa-4 my-5 align-center justify-center rounded-xl elevation-5"
       color="background-dark"
     >
-      <v-btn
-        variant="outlined"
-        prepend-icon="mdi-plus-circle"
-        color="primary"
-        class="rounded-xl elevation-5"
-        @click="initDish"
-      >
-      <span class="font-weight-bold">Добавить позицию</span>
-      </v-btn>
+      <h2 class="text-primary font-weight-bold text-center">Добавьте блюда</h2>
     </v-sheet>
 
     <v-sheet
@@ -20,9 +12,7 @@
       class="min-height-50per pa-5 mb-5 rounded-xl elevation-5"
       elevation="10"
     >
-      <empty-message v-if="DishStore.dishes.length === 0"
-        >Пока ничего нет</empty-message
-      >
+      <empty-message v-if="DishStore.dishes.length === 0">Пока ничего нет</empty-message>
 
       <dish-card
         v-for="dish in DishStore.dishes"
@@ -31,11 +21,20 @@
         class="mb-10 elevation-10"
       >
       </dish-card>
+
+      <v-btn
+        block
+        prepend-icon="mdi-plus-circle"
+        class="rounded-xl elevation-5 align-center bg-primary"
+        @click="initDish"
+      >
+        Добавить позицию
+      </v-btn>
     </v-sheet>
-  
-    <v-sheet 
-      color="background-dark" 
-      class="d-flex flex-column pa-4 rounded-xl elevation-5 mb-10 align-center "
+
+    <v-sheet
+      color="background-dark"
+      class="d-flex flex-column pa-4 rounded-xl elevation-5 mb-10 align-center"
     >
       <p class="mb-5 text-center text-lg-h5 text-sm-h6">Промежуточный итог:</p>
       <div class="d-flex align-center">
@@ -43,7 +42,7 @@
         <v-icon>mdi-currency-rub</v-icon>
       </div>
     </v-sheet>
-  
+
     <v-row justify="center">
       <v-col cols="auto">
         <v-btn
@@ -81,20 +80,20 @@ const DishStore = useDishStore()
 const CalculateStore = useCalculateStore()
 const WarningStore = useWarningStore()
 
-const router = useRouter()
+const router = useRouter();
 
 const initDish = () => {
   DishStore.initDish()
-}
+};
 
 const goToResult = () => {
   if (!DishStore.checkDishes()) {
     WarningStore.showWarning('Заполните все поля!')
-    return;
+    return
   } else if (DishStore.dishes.length < 2) {
     WarningStore.showWarning('Добавьте минимум 2 блюда!')
-    return;
+    return
   }
-  router.push('/result')
-};
+  router.push('/result');
+}
 </script>

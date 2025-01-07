@@ -17,7 +17,9 @@ import AppWarning from './components/AppWarning.vue';
 import { usePersonStore } from './stores/PersonStore';
 
 onMounted(() => {
-  const PersonStore = usePersonStore();
-  PersonStore.loadPersonsFromStorage();
+  const PersonStore = usePersonStore()
+  if (PersonStore.persons.length === 0) {
+    PersonStore.loadPersonsFromStorage()
+  }
 });
 </script>

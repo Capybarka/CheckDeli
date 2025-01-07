@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { usePersonStore } from './PersonStore';
-// import { useWarningStore } from './WarningStore';
 
 export const useDishStore = defineStore('DishStore', {
   state: () => {
@@ -11,7 +10,7 @@ export const useDishStore = defineStore('DishStore', {
 
   actions: {
     initDish() {
-      const PersonStore = usePersonStore();
+      const PersonStore = usePersonStore()
       const newDish = {
         id: Date.now(),
         name: '',
@@ -19,32 +18,30 @@ export const useDishStore = defineStore('DishStore', {
         payer: PersonStore.persons[0],
         users: [],
       };
-      this.dishes.push(newDish);
-      // console.log('init', PersonStore.persons[0]);
+      this.dishes.push(newDish)
+      console.log('init', PersonStore.persons[0])
     },
 
     deleteDish(id) {
-      this.dishes = this.dishes.filter((dish) => dish.id !== id);
+      this.dishes = this.dishes.filter((dish) => dish.id !== id)
     },
 
     updateUsers(id, newUsers) {
-      const idx = this.dishes.findIndex((dish) => dish.id === id);
+      const idx = this.dishes.findIndex((dish) => dish.id === id)
 
       if (idx !== -1) {
-        this.dishes[idx].users = [...newUsers];
+        this.dishes[idx].users = [...newUsers]
       }
     },
 
     checkDishes() {
-      // const WarningStore = useWarningStore()
-      let flag = true;
+      let flag = true
       this.dishes.forEach((dish) => {
         if (!dish.name || dish.price === '' || dish.users.length === 0) {
-          // WarningStore.showWarning('Заполните все поля!')
-          flag = false;
+          flag = false
         }
-      });
-      return flag;
+      })
+      return flag
     },
   },
 });

@@ -118,28 +118,28 @@ const props = defineProps({
   },
 });
 
-const PersonStore = usePersonStore()
-const DishStore = useDishStore()
+const PersonStore = usePersonStore();
+const DishStore = useDishStore();
 
 const dialog = ref(false);
 
 const deleteDish = (dish) => {
-  DishStore.deleteDish(dish.id)
+  DishStore.deleteDish(dish.id);
 };
 
-const selectedPersons = ref([])
-const allPersonsSelected = ref(false)
+const selectedPersons = ref([]);
+const allPersonsSelected = ref(false);
 
 const checkAllPersons = () => {
   if (allPersonsSelected.value) {
-    selectedPersons.value = []
+    selectedPersons.value = [];
   } else {
-    selectedPersons.value = [...PersonStore.persons]
+    selectedPersons.value = [...PersonStore.persons];
   }
 };
 
 watch(selectedPersons, (newValues) => {
-  allPersonsSelected.value = newValues.length === PersonStore.persons.length ? true : false
-  DishStore.updateUsers(props.dish.id, newValues)
-})
+  allPersonsSelected.value = newValues.length === PersonStore.persons.length ? true : false;
+  DishStore.updateUsers(props.dish.id, newValues);
+});
 </script>

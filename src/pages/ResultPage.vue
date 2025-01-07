@@ -8,15 +8,15 @@
     class="result-content pa-4 mb-5 elevation-10 rounded-xl bg-background-dark"
   ></v-sheet>
   <v-row justify="center">
-      <v-col cols="auto">
-        <v-btn
-          color="primary"
-          @click="router.push('/')"
-        >
-          На главную
-        </v-btn>
-      </v-col>
-    </v-row>
+    <v-col cols="auto">
+      <v-btn
+        color="primary"
+        @click="router.push('/')"
+      >
+        На главную
+      </v-btn>
+    </v-col>
+  </v-row>
 </template>
 
 <script setup>

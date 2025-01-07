@@ -41,9 +41,9 @@ const addPerson = () => {
       id: Date.now(),
       name: personName.value,
     });
-    personName.value = ''
+    personName.value = '';
   } else {
-    WarningStore.showWarning('Введите имя!')
+    WarningStore.showWarning('Введите имя!');
   }
 };
 </script>

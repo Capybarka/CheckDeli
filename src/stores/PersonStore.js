@@ -9,22 +9,22 @@ export const usePersonStore = defineStore('PersonStore', {
 
   actions: {
     loadPersonsFromStorage() {
-      const storedPersons = localStorage.getItem('persons');
+      const storedPersons = localStorage.getItem('persons')
       if (storedPersons) {
-        this.persons.push(...JSON.parse(storedPersons));
+        this.persons.push(...JSON.parse(storedPersons))
       }
     },
 
     addPerson(person) {
-      this.persons.push(person);
-      localStorage.setItem('persons', JSON.stringify(this.persons));
+      this.persons.push(person)
+      localStorage.setItem('persons', JSON.stringify(this.persons))
     },
 
     deletePerson(id) {
-      const idx = this.persons.findIndex((user) => user.id === id);
+      const idx = this.persons.findIndex((user) => user.id === id)
       if (idx !== -1) {
-        this.persons.splice(idx, 1);
-        localStorage.setItem('persons', JSON.stringify(this.persons));
+        this.persons.splice(idx, 1)
+        localStorage.setItem('persons', JSON.stringify(this.persons))
       }
     },
   },
