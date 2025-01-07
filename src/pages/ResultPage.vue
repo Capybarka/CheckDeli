@@ -14,7 +14,6 @@
         :key="person"
       >
         <v-card-title class="text-center rounded-xl text-primary font-weight-bold"> {{ person }} должен: </v-card-title>
-
         <p
           v-if="debtorList.length === 0"
           class="text-center font-weight-bold"

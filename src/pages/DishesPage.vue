@@ -39,7 +39,7 @@
       <p class="mb-5 text-center text-lg-h5 text-sm-h6">Промежуточный итог:</p>
       <div class="d-flex align-center">
         <p class="text-h4">{{ CalculationStore.getTotalSum }}</p>
-        <v-icon>mdi-currency-rub</v-icon>
+        <v-icon size="large">mdi-currency-rub</v-icon>
       </div>
     </v-sheet>
 
