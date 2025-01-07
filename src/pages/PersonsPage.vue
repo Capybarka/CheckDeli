@@ -49,12 +49,12 @@
 </template>
 
 <script setup>
-import { useWarningStore } from '../stores/WarningStore';
-import { usePersonStore } from '../stores/PersonStore';
+import { useWarningStore } from '@/stores/WarningStore';
+import { usePersonStore } from '@/stores/PersonStore';
 import { useRouter } from 'vue-router';
-import PersonForm from '../components/PersonForm.vue';
-import PersonCard from '../components/PersonCard.vue';
-import EmptyMessage from '../components/EmptyMessage.vue';
+import PersonForm from '@/components/PersonForm.vue';
+import PersonCard from '@/components/PersonCard.vue';
+import EmptyMessage from '@/components/EmptyMessage.vue';
 
 const WarningStore = useWarningStore();
 const PersonStore = usePersonStore();

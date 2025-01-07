@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { usePersonStore } from '../stores/PersonStore';
+import { usePersonStore } from '@/stores/PersonStore';
 
 const PersonStore = usePersonStore();
 

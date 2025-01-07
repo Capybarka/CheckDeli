@@ -17,7 +17,7 @@ export const useWarningStore = defineStore('WarningStore', {
 
       setTimeout(() => {
         this.isWarningShow = false;
-      }, 3000);
+      }, 2000);
     },
   },
 });

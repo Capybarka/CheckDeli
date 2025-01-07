@@ -21,7 +21,10 @@
         >
           Никому он ничего не должен!
         </p>
-        <div v-else class="d-flex justify-center">
+        <div
+          v-else
+          class="d-flex justify-center"
+        >
           <p
             v-for="debt in debtorList"
             :key="debt.debtor"
@@ -34,7 +37,6 @@
             size="small"
           />
         </div>
-      
       </v-card>
     </div>
   </v-sheet>

@@ -8,5 +8,3 @@
     <v-icon>mdi-emoticon-sad</v-icon>
   </div>
 </template>
-
-<script setup></script>
