@@ -16,7 +16,7 @@
 
       <dish-card
         v-for="dish in DishStore.dishes"
-        :key="dish"
+        :key="dish.id"
         :dish="dish"
         class="mb-10 elevation-10"
       >

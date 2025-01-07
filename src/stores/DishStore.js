@@ -3,11 +3,9 @@ import { usePersonStore } from './PersonStore';
 import { useWarningStore } from './WarningStore';
 
 export const useDishStore = defineStore('DishStore', {
-  state: () => {
-    return {
-      dishes: [],
-    };
-  },
+  state: () => ({
+    dishes: [],
+  }),
 
   actions: {
     initDish() {
@@ -27,25 +25,28 @@ export const useDishStore = defineStore('DishStore', {
     },
 
     updatePersons(id, newPersons) {
-      const idx = this.dishes.findIndex((dish) => dish.id === id);
+      const dish = this.dishes.find((dish) => dish.id === id);
+      if (dish) {
+        dish.users = [...newPersons];
+      }
+    },
 
-      if (idx !== -1) {
-        this.dishes[idx].users = [...newPersons];
+    updateDish(updatedDish) {
+      const index = this.dishes.findIndex((dish) => dish.id === updatedDish.id);
+      if (index !== -1) {
+        this.dishes[index] = { ...updatedDish };
       }
     },
 
     checkDishes() {
       const WarningStore = useWarningStore();
-
-      const isValid = !this.dishes.some((dish) => {
+      return !this.dishes.some((dish) => {
         if (!dish.name || !dish.price || dish.users.length === 0) {
           WarningStore.showWarning('Заполните все поля!');
-          return true; 
+          return true;
         }
         return false;
       });
-
-      return isValid;
     },
   },
 });

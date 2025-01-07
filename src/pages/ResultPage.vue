@@ -55,12 +55,10 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCalculationStore } from '@/stores/CalculationStore';
-import { useDishStore } from '@/stores/DishStore';
-import { ref, reactive } from 'vue';
+import { reactive } from 'vue';
 
 const router = useRouter();
 const CalculationStore = useCalculationStore();
-const DishStore = useDishStore();
 
 const debts = reactive({});
 

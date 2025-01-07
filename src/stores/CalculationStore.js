@@ -11,8 +11,8 @@ export const useCalculationStore = defineStore('CalculationStore', {
   },
   actions: {
     calculateDebts() {
-      const DishStore = useDishStore(); 
-      const PersonStore = usePersonStore(); 
+      const DishStore = useDishStore();
+      const PersonStore = usePersonStore();
 
       if (!DishStore.dishes.length || !PersonStore.persons.length) {
         return {};

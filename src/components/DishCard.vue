@@ -5,20 +5,20 @@
   >
     <v-text-field
       label="Название"
-      v-model="dish.name"
+      v-model="localDish.name"
     >
       <template v-slot:prepend>
-        <v-icon> mdi-food-fork-drink </v-icon>
+        <v-icon>mdi-food-fork-drink</v-icon>
       </template>
     </v-text-field>
 
     <v-text-field
       type="number"
       label="Цена"
-      v-model="dish.price"
+      v-model="localDish.price"
     >
       <template v-slot:prepend>
-        <v-icon> mdi-currency-rub </v-icon>
+        <v-icon>mdi-currency-rub</v-icon>
       </template>
     </v-text-field>
 
@@ -29,7 +29,7 @@
         style="flex: 0 0 50%"
         prepend-icon="mdi-wallet"
       >
-        {{ dish.payer.name }}
+        {{ localDish.payer.name }}
       </v-btn>
       <v-btn
         class="elevation-3 py-2 bg-primary"
@@ -49,7 +49,6 @@
         <v-expansion-panel-title class="font-weight-bold text-primary text-center">
           Отметьте тех, кто вкусил
         </v-expansion-panel-title>
-
         <v-expansion-panel-text>
           <div class="d-flex flex-wrap ga-5">
             <v-btn
@@ -68,8 +67,7 @@
                 :key="person.id"
                 :label="person.name"
                 :value="person"
-              >
-              </v-checkbox>
+              />
             </div>
           </div>
         </v-expansion-panel-text>
@@ -81,15 +79,14 @@
       v-model="dialog"
     >
       <v-card class="pa-10 bg-background-light">
-        <v-radio-group v-model="dish.payer">
+        <v-radio-group v-model="localDish.payer">
           <p class="font-weight-bold mb-5">Выберите того, кто платил за это блюдо</p>
           <v-radio
             v-for="person in PersonStore.persons"
             :key="person.id"
             :label="person.name"
             :value="person"
-          >
-          </v-radio>
+          />
         </v-radio-group>
       </v-card>
     </v-dialog>
@@ -97,7 +94,7 @@
     <div class="d-flex justify-center">
       <v-btn
         class="elevation-5 bg-error"
-        @click="deleteDish(dish)"
+        @click="deleteDish(localDish)"
       >
         Удалить
         <v-icon class="ml-2">mdi-delete</v-icon>
@@ -107,7 +104,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { usePersonStore } from '../stores/PersonStore';
 import { useDishStore } from '../stores/DishStore';
 
@@ -115,30 +112,36 @@ const props = defineProps({
   dish: {
     type: Object,
     required: true,
-    default: () => ({}),
   },
 });
 
 const PersonStore = usePersonStore();
 const DishStore = useDishStore();
 
+const localDish = ref({ ...props.dish });
 const dialog = ref(false);
 
-const deleteDish = (dish) => {
-  if (dish && dish.id) {
-    DishStore.deleteDish(dish.id);
-  }
-};
-
-const selectedPersons = ref([]);
-const allPersonsSelected = ref(false);
+const selectedPersons = ref(localDish.value.users);
+const allPersonsSelected = computed(() => selectedPersons.value.length === PersonStore.persons.length);
 
 const checkAllPersons = () => {
   selectedPersons.value = allPersonsSelected.value ? [] : [...PersonStore.persons];
 };
 
 watch(selectedPersons, (newValues) => {
-  allPersonsSelected.value = newValues.length === PersonStore.persons.length ? true : false;
-  DishStore.updatePersons(props.dish.id, newValues);
+  localDish.value.users = newValues;
+  DishStore.updatePersons(localDish.value.id, newValues);
 });
+
+watch(
+  localDish,
+  (newDish) => {
+    DishStore.updateDish(newDish);
+  },
+  { deep: true },
+);
+
+const deleteDish = (dish) => {
+  DishStore.deleteDish(dish.id);
+};
 </script>

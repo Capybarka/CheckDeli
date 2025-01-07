@@ -1,7 +1,7 @@
 import js from '@eslint/js';
 import vue from 'eslint-plugin-vue';
 import globals from 'globals';
-import * as espree from 'espree'; // Используем именованный импорт для espree
+import vueEslintParser from 'vue-eslint-parser';
 
 export default [
   js.configs.recommended,
@@ -13,15 +13,19 @@ export default [
       globals: {
         ...globals.browser,
       },
-      parser: espree,
+      parser: vueEslintParser,
     },
     plugins: {
       vue,
     },
     rules: {
-      'vue/no-unused-vars': 'warn',
-      quotes: ['error', 'single'],
-      'no-console': 'warn',
+      'vue/no-mutating-props': 'error',
+      'vue/no-unused-vars': 'off',
+      'vue/multi-word-component-names': 'off',
+      'vue/no-reserved-component-names': 'off',
+      'vue/singleline-html-element-content-newline': 'off',
+      'vue/v-slot-style': 'off',
+      'vue/valid-template-root': 'warn',
     },
   },
 ];
