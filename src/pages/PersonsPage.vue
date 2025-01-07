@@ -1,16 +1,19 @@
 <template>
   <div>
-    <v-sheet class="pa-4 mb-5 elevation-5 rounded-xl mt-5 bg-background-light">
-      <h2 class="text-primary font-weight-bold text-center">Добавьте участников</h2>
+    <v-sheet
+      class="add-person__title pa-4 mb-5 elevation-5 rounded-xl mt-5"
+      color="background-dark"
+    >
+      <p class="text-primary font-weight-bold text-center">Добавьте участников</p>
     </v-sheet>
 
     <v-sheet
       class="persons-list pa-5 mb-10 rounded-xl elevation-5"
       color="background-dark"
     >
-      <PersonForm
-        @add-person-emit="addPerson"
-        class="mb-10"
+      <PersonForm 
+        class="mb-10" 
+        @add-person-emit="addPerson" 
       />
       <empty-message v-if="PersonStore.persons.length === 0"
         >Пока никого нет</empty-message
@@ -20,27 +23,27 @@
         class="mb-5"
         :key="person.id"
         :person="person"
-      ></person-card>
+      >
+      </person-card>
     </v-sheet>
 
     <v-row justify="center">
       <v-col cols="auto">
         <v-btn
-          prepend-icon="mdi-hand-pointing-left"
           color="primary"
+          class="elevation-5 mr-5"
           @click="router.push('/')"
         >
-          Назад
+          <v-icon>mdi-hand-pointing-left</v-icon>
+          <p class="ml-5">Назад</p>
         </v-btn>
-      </v-col>
-
-      <v-col cols="auto">
-        <v-btn
-          append-icon="mdi-hand-pointing-right"
-          color="primary"
-          @click="goToDishes"
+        <v-btn 
+          color="primary" 
+          class="elevation-5" 
+          @click="goToAddDishes"
         >
-          Далеe
+          <p class="mr-5">Далее</p>
+          <v-icon>mdi-hand-pointing-right</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -48,31 +51,32 @@
 </template>
 
 <script setup>
-import { usePersonStore } from '@/stores/PersonStore';
-import { useWarningStore } from '@/stores/WarningStore';
-import { useRouter } from 'vue-router';
-import PersonForm from '@/components/PersonForm.vue';
-import PersonCard from '@/components/PersonCard.vue';
-import EmptyMessage from '@/components/EmptyMessage.vue';
+import { useWarningStore } from "../stores/WarningStore";
+import { usePersonStore } from "../stores/PersonStore";
+import {useRouter} from 'vue-router'
+import PersonForm from "../components/PersonForm.vue";
+import PersonCard from "../components/PersonCard.vue";
+import EmptyMessage from "../components/EmptyMessage.vue";
 
-const PersonStore = usePersonStore()
-const WarningStore = useWarningStore()
+const WarningStore = useWarningStore();
+const PersonStore = usePersonStore();
 
 const router = useRouter()
 
 const addPerson = (person) => PersonStore.addPerson(person)
 
-const goToDishes = () => {
+const goToAddDishes = () => {
   if (PersonStore.persons.length < 2) {
-    WarningStore.showWarning('Добавьте минимум 2-х людей!')
-    return;
+    WarningStore.showWarning("Добавьте хотя бы 2 человека!");
+  } else {
+    router.push('/dishes')
   }
-  router.push('/dishes')
-}
+};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .persons-list {
   min-height: 60vh;
 }
 </style>
+

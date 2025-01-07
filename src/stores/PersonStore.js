@@ -18,6 +18,7 @@ export const usePersonStore = defineStore('PersonStore', {
     addPerson(person) {
       this.persons.push(person)
       localStorage.setItem('persons', JSON.stringify(this.persons))
+      console.log('был добавлен', person)
     },
 
     deletePerson(id) {

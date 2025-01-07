@@ -38,7 +38,7 @@
     >
       <p class="mb-5 text-center text-lg-h5 text-sm-h6">Промежуточный итог:</p>
       <div class="d-flex align-center">
-        <p class="text-h4">{{ CalculateStore.getTotalSum }}</p>
+        <p class="text-h4">{{ CalculationStore.getTotalSum }}</p>
         <v-icon>mdi-currency-rub</v-icon>
       </div>
     </v-sheet>
@@ -69,7 +69,7 @@
 
 <script setup>
 import { useDishStore } from '@/stores/DishStore';
-import { useCalculateStore } from '@/stores/CalculationStore';
+import { useCalculationStore } from '@/stores/CalculationStore';
 import { useWarningStore } from '@/stores/WarningStore';
 import { useRouter } from 'vue-router';
 
@@ -77,7 +77,7 @@ import EmptyMessage from '@/components/EmptyMessage.vue';
 import DishCard from '@/components/DishCard.vue';
 
 const DishStore = useDishStore()
-const CalculateStore = useCalculateStore()
+const CalculationStore = useCalculationStore()
 const WarningStore = useWarningStore()
 
 const router = useRouter();
@@ -94,6 +94,7 @@ const goToResult = () => {
     WarningStore.showWarning('Добавьте минимум 2 блюда!')
     return
   }
-  router.push('/result');
+  DishStore.getAllDishes()
+  router.push('/result')
 }
 </script>
