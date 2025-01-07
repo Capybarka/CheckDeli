@@ -1,5 +1,7 @@
 import js from '@eslint/js';
-import vue from 'eslint-plugin-vue'; // Импортируем плагин для Vue
+import vue from 'eslint-plugin-vue'; 
+import globals from 'globals';
+import * as espree from 'espree'; // Используем именованный импорт для espree
 
 export default [
     js.configs.recommended,
@@ -8,6 +10,10 @@ export default [
         languageOptions: {
             ecmaVersion: 2021,
             sourceType: 'module',
+            globals: {
+                ...globals.browser, 
+            },
+            parser: espree, 
         },
         plugins: {
             vue,

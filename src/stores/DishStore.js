@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { usePersonStore } from './PersonStore';
-import { useWarningStore } from './WarningStore';
+// import { useWarningStore } from './WarningStore';
 
 export const useDishStore = defineStore('DishStore', {
     state: () => {
@@ -20,7 +20,7 @@ export const useDishStore = defineStore('DishStore', {
                 users: [],
             };
             this.dishes.push(newDish);
-            console.log('init', PersonStore.persons[0]);
+            // console.log('init', PersonStore.persons[0]);
         },
 
         deleteDish(id) {
