@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-sheet class="d-flex pa-4 my-5 align-center justify-center rounded-xl elevation-5 bg-background-light">
+    <v-sheet
+      class="d-flex pa-4 my-5 align-center justify-center rounded-xl elevation-5"
+      color="background-dark"
+    >
       <v-btn
         variant="outlined"
         prepend-icon="mdi-plus-circle"
@@ -8,46 +11,56 @@
         class="rounded-xl elevation-5"
         @click="initDish"
       >
-        <span class="font-weight-bold">Добавить позицию</span>
+      <span class="font-weight-bold">Добавить позицию</span>
       </v-btn>
     </v-sheet>
 
-    <v-sheet class="min-height-50per pa-5 mb-5 rounded-xl elevation-5 bg-background-dark elevation-10">
-      <empty-message v-if="DishStore.dishes.length === 0">Пока ничего нет</empty-message>
+    <v-sheet
+      color="background-dark"
+      class="min-height-50per pa-5 mb-5 rounded-xl elevation-5"
+      elevation="10"
+    >
+      <empty-message v-if="DishStore.dishes.length === 0"
+        >Пока ничего нет</empty-message
+      >
+
       <dish-card
         v-for="dish in DishStore.dishes"
-        class="mb-10 elevation-10"
         :key="dish"
         :dish="dish"
-      ></dish-card>
+        class="mb-10 elevation-10"
+      >
+      </dish-card>
     </v-sheet>
-
-    <v-sheet class="d-flex flex-column pa-4 rounded-xl elevation-5 mb-10 align-center bg-background-dark">
+  
+    <v-sheet 
+      color="background-dark" 
+      class="d-flex flex-column pa-4 rounded-xl elevation-5 mb-10 align-center "
+    >
       <p class="mb-5 text-center text-lg-h5 text-sm-h6">Промежуточный итог:</p>
       <div class="d-flex align-center">
         <p class="text-h4">{{ CalculateStore.getTotalSum }}</p>
         <v-icon>mdi-currency-rub</v-icon>
       </div>
     </v-sheet>
-
+  
     <v-row justify="center">
       <v-col cols="auto">
-        <v-btn
-          prepend-icon="mdi-hand-pointing-left"
-          color="primary"
-          @click="router.push('/persons')"
+        <v-btn 
+          color="primary" 
         >
-          Назад
+          <v-icon>mdi-hand-pointing-left</v-icon>
+          <p class="ml-5">Назад</p>
         </v-btn>
       </v-col>
 
       <v-col cols="auto">
-        <v-btn
-          append-icon="mdi-hand-pointing-right"
-          color="primary"
-          @click="router.push('/result')"
+        <v-btn 
+          color="primary" 
+          @click="goToResult"
         >
-          Далеe
+          <p class="mr-5">Далее</p>
+          <v-icon>mdi-hand-pointing-right</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -59,6 +72,7 @@ import { useDishStore } from '@/stores/DishStore';
 import { useCalculateStore } from '@/stores/CalculationStore';
 import { useWarningStore } from '@/stores/WarningStore';
 import { useRouter } from 'vue-router';
+
 import EmptyMessage from '@/components/EmptyMessage.vue';
 import DishCard from '@/components/DishCard.vue';
 
@@ -70,7 +84,7 @@ const router = useRouter()
 
 const initDish = () => {
   DishStore.initDish()
-};
+}
 
 const goToResult = () => {
   if (!DishStore.checkDishes()) {
