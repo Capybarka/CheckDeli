@@ -1,24 +1,37 @@
 <template>
-    <div class="result__wrapper">
-        <v-card class="pa-5 mb-5" color="background-light">
-            <h2 class="align-center mb-3">Результаты</h2>
-            <p class="align-center">Кто кому и сколько должен</p>
-        </v-card>
-        <v-card
-            elevation="10"
-            variant="tonal"
-            class="result-content pa-4 mb-5"
-        ></v-card>
-        <v-row justify="center">
-            <v-col cols="auto">
-                <v-btn variant="outlined" color="primary"> На главную </v-btn>
-            </v-col>
-        </v-row>
-    </div>
+  <v-sheet class="pa-5 mb-5 bg-background-light elevation-10 rounded-xl">
+    <h2 class="text-center mb-3 text-primary">Результаты</h2>
+    <h3 class="text-center">Кто кому и сколько должен</h3>
+  </v-sheet>
+  <v-sheet
+    variant="tonal"
+    class="result-content pa-4 mb-5 elevation-10 rounded-xl bg-background-dark"
+  ></v-sheet>
+  <v-row justify="center">
+      <v-col cols="auto">
+        <v-btn
+          prepend-icon="mdi-hand-pointing-left"
+          color="primary"
+          @click="router.push('/dishes')"
+        >
+          Назад
+        </v-btn>
+      </v-col>
+
+      <v-col cols="auto">
+        <v-btn
+          append-icon="mdi-hand-pointing-right"
+          color="primary"
+          @click="router.push('/')"
+        >
+          Далеe
+        </v-btn>
+      </v-col>
+    </v-row>
 </template>
 
 <script setup>
-// import { useNavigationStore } from '../stores/NavigationStore'
+import { useRouter } from 'vue-router';
 
-// const NavigationStore = useNavigationStore()
+const router = useRouter()
 </script>
